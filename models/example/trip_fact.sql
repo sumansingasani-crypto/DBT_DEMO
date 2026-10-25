@@ -12,7 +12,8 @@ WITH bike AS (
             TRY_TO_TIMESTAMP(STARTED_AT),
             TRY_TO_TIMESTAMP(ENDED_AT)
         ) AS TRIP_DURATION_SECONDS
-    FROM {{ source('DEMO', 'bike') }}
+    --FROM {{ source('DEMO', 'bike') }}
+    FROM {{ ref('stage_bike') }}
     WHERE RIDE_ID != 'RIDE_ID'
       AND TRY_TO_TIMESTAMP(STARTED_AT) IS NOT NULL
       AND TRY_TO_TIMESTAMP(ENDED_AT) IS NOT NULL

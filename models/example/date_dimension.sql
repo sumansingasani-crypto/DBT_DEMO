@@ -10,7 +10,9 @@ AS Station_of_year,
 CASE WHEN DAYNAME(to_timestamp(started_at)) in ('Sat', 'Sun')
 THEN 'WEEKEND'
 ELSE 'WEEKDAY' END AS DAY_TYPE
-From {{ source('DEMO', 'bike') }}
+--From {{ source('DEMO', 'bike') }}
+    FROM {{ ref('stage_bike') }}
+
 where started_at not in ('stoptime','started_at')
 
 )
